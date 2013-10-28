@@ -3,6 +3,10 @@
 
     <string name="app_name">Harimakila</string>
     <string name="action_settings">Settings</string>
+    <string name="action_record_points">Grabar punto</string>
+    <string name="action_play_walk">Reproducir paseo</string>
     <string name="harimakila_descripcion">Harimakila es un proyecto que se enmarca dentro de un proceso que quiere revertir y sensibilizar....</string>
+    <string name="title_activity_play_walk">Reproducir Paseo</string>
+    <string name="intro_paseo">Arrancando con el paseo de prueba!</string>
 
 </resources>
