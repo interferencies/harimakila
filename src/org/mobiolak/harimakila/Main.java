@@ -1,7 +1,6 @@
 package org.mobiolak.harimakila;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ public class Main extends Activity {
 
 	WifiManager wifi;
 	Intent i;
+	static String HARIMAKILA_DIRECTORY = "/harimakila";
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {

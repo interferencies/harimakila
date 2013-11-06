@@ -31,7 +31,8 @@ public class RecordPoints extends Activity {
 	private TextView signal;
 	private boolean record_position = false; // estamos grabando
 	OutputStreamWriter osw;
-	private String HARIMAKILA_DIRECTORY = "/harimakila";
+	
+	private WifiWalk ww;
 	
 	HashMap<String,WifiAP> h = new HashMap<String, WifiAP>();
 	
@@ -79,6 +80,7 @@ public class RecordPoints extends Activity {
         signal = (TextView) findViewById(R.id.signal);
         signal.setText("Sin captura de señales Wifi");
         wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        ww = new WifiWalk();
     }
     
     protected void onResume() {
@@ -132,7 +134,7 @@ public class RecordPoints extends Activity {
     		
     		try {
     			File sdCard = Environment.getExternalStorageDirectory();
-    			File directory = new File(sdCard.getAbsolutePath()+HARIMAKILA_DIRECTORY);
+    			File directory = new File(sdCard.getAbsolutePath()+Main.HARIMAKILA_DIRECTORY);
     			Log.d("HARIMAKILA",directory.getPath());
     			if (!directory.isDirectory()) {
     				directory.mkdirs();
@@ -143,6 +145,8 @@ public class RecordPoints extends Activity {
     			
     			FileOutputStream fOut = new FileOutputStream(file);
     			osw = new OutputStreamWriter(fOut);
+    			
+    			ww.setName(e.getText().toString());
     			
 	    		b.setText("Grabando");
 	    	} catch (Exception e) {
