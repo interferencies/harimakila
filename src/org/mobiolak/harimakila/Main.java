@@ -6,6 +6,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 public class Main extends Activity {
 
 	WifiManager wifi;
@@ -44,5 +45,10 @@ public class Main extends Activity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+    
+    public void onClick (View v) {
+    	i = new Intent("org.mobiolak.harimakila.PlayWalk");
+		startActivity(i);
+    }
     
 }

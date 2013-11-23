@@ -13,17 +13,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -35,21 +37,24 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class PlayWalk extends Activity implements SensorEventListener  {
+public class PlayWalk extends Activity implements SensorEventListener {
 
 	WifiManager wifi;
 	Vibrator v;
 	WifiWalk walk;
 	static TextView ic,iw;
-	static String PATH_PASEO = "/storage/sdcard0/harimakila/paseo.json";
+	int hPaso=0;
+	Consejo c;
 	
 	Handler gScanWifi = new Handler();
 	Handler Monitor = new Handler();
 	protected PowerManager.WakeLock wakelock;
 	KeyguardManager  myKeyGuard;
 	
-	private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
+	//private SensorManager mSensorManager;
+    //private Sensor mAccelerometer;
+    static File sdCard = Environment.getExternalStorageDirectory();
+    static String PATH_PASEO = sdCard.getAbsolutePath()+Main.HARIMAKILA_DIRECTORY+"/paseo.json";
 
 	
 	static Handler Colisiones = new Handler() {
@@ -108,6 +113,16 @@ public class PlayWalk extends Activity implements SensorEventListener  {
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
+		// Fragmentos
+//		
+//		FragmentManager fragmentManager = getFragmentManager();
+//		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//		
+//		Consejo c = new org.mobiolak.harimakila.Consejo();
+//		fragmentTransaction.replace(android.R.id.content,c);
+		
+		Log.d("HARIMAKILA","my value: "+hPaso);
+		
 		ic = (TextView) findViewById(R.id.info_colisiones);
 		iw = (TextView) findViewById(R.id.info_coberturas);
 		
@@ -136,8 +151,26 @@ public class PlayWalk extends Activity implements SensorEventListener  {
 //	    this.wakelock=pm.newWakeLock(PowerManager., "etiqueta");
 //	    wakelock.acquire();
 	
-		mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		//mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        //mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		if (findViewById(R.id.consejos)!=null) {
+			c = new Consejo();
+			//c.putPosition(hPaso);
+			 if (savedInstanceState!=null) return;
+			 c.setArguments(getIntent().getExtras());
+			 FragmentManager fM = getFragmentManager();
+			 FragmentTransaction fT = fM.beginTransaction();
+			 fT.replace(R.id.consejos,c);
+			 fT.commit();
+			 //fM.beginTransaction().add(R.id.consejos,c).commit();
+		}
+		
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		
 		
 	}
 	
@@ -145,13 +178,13 @@ public class PlayWalk extends Activity implements SensorEventListener  {
 	protected void onResume() {
 		super.onResume();
 		gScanWifi.postDelayed(TimerThreadWifi, 100);
-		mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+		//mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
-        mSensorManager.unregisterListener(this);
+        //mSensorManager.unregisterListener(this);
 	}
 	
 	@Override
@@ -187,7 +220,19 @@ public class PlayWalk extends Activity implements SensorEventListener  {
 		return super.onOptionsItemSelected(item);
 	}
 
-
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		  super.onSaveInstanceState(savedInstanceState);
+		  savedInstanceState.putInt("Posicion",c.getPosition());
+		  Log.d("HARIMAKILA","Guardando posición"+c.getPosition());
+		}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+	  super.onRestoreInstanceState(savedInstanceState);
+	  hPaso = savedInstanceState.getInt("Posicion");
+	  Log.d("HARIMAKILA","Recuperand posición"+hPaso);
+	}
 
 	@Override
 	public void onAccuracyChanged(Sensor arg0, int arg1) {
@@ -205,7 +250,7 @@ public class PlayWalk extends Activity implements SensorEventListener  {
 		for (int i = 0; i<gravity.length; i++) {
 			resultado=resultado+"|"+String.valueOf(gravity[i]);
 		}
-		Log.d("ACELEROMETRO", resultado);
+		//Log.d("ACELEROMETRO", resultado);
 	}
 
 }

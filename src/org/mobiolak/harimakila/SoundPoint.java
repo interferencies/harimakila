@@ -20,7 +20,7 @@ public class SoundPoint {
 	Integer UMBRAL = 8;
 	private double vol;
 	static double UP = 0.01;
-	static double DOWN = -0.01;
+	static double DOWN = -0.1;
 	static double MAX = 1.0;
 	MediaPlayer m;
 	File sdCard = Environment.getExternalStorageDirectory();
@@ -105,12 +105,12 @@ public class SoundPoint {
 				}
 				break;
 				case SoundPoint.WIFI_RSSI:
-					Log.d("HARIMAKILA","Tipo nivel señal");
+					//Log.d("HARIMAKILA","Tipo nivel señal");
 					// Solo un essid y solo un umbral
 					while (i.hasNext()) {
 						String essid = i.next();
 						//Integer e0 = this.point.get(essid);
-						if (w.get(essid)==null) {changeVolume(DOWN,MAX);  return false; } // El essid no está disponible (fuera de rango..)
+						if (w.get(essid)==null) {changeVolume(DOWN,MAX); this.vol=0;  return false; } // El essid no está disponible (fuera de rango..)
 						//this.umbral.get(essid)
 						Log.e("HARIMAKILA","[**]W:"+w.get(essid)+", P:"+this.point.get(essid)+" P+U"+(this.point.get(essid)-this.umbral.get(essid)));
 						if (w.get(essid)>=this.point.get(essid)) {
@@ -124,6 +124,8 @@ public class SoundPoint {
 							// Zona fuera de rango
 							//changeVolume(DOWN);
 							changeVolume(DOWN,MAX);
+							//this.vol=0;
+							return false;
 						}
 						//float level=(float) (100+w.get(essid)) / 100;
 						

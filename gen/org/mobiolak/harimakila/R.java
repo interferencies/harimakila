@@ -21,22 +21,39 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int fondo_amarillo=0x7f020000;
+        public static final int fondo_azul=0x7f020001;
+        public static final int fondo_rosa=0x7f020002;
+        public static final int harima_logo_base=0x7f020003;
+        public static final int ic_launcher=0x7f020004;
+        public static final int icono_bolso=0x7f020005;
+        public static final int icono_cascos=0x7f020006;
+        public static final int icono_musica=0x7f020007;
+        public static final int icono_tortuga=0x7f020008;
+        public static final int logo=0x7f020009;
     }
     public static final class id {
-        public static final int action_play_walk=0x7f080006;
-        public static final int action_record_points=0x7f080005;
-        public static final int action_settings=0x7f080007;
-        public static final int button1=0x7f080001;
-        public static final int editText1=0x7f080002;
-        public static final int info_coberturas=0x7f080004;
-        public static final int info_colisiones=0x7f080003;
-        public static final int signal=0x7f080000;
+        public static final int action_play_walk=0x7f08000d;
+        public static final int action_record_points=0x7f08000c;
+        public static final int action_settings=0x7f08000e;
+        public static final int button1=0x7f080003;
+        public static final int consejos=0x7f080005;
+        public static final int editText1=0x7f080004;
+        public static final int icono=0x7f080009;
+        public static final int imageView1=0x7f080000;
+        public static final int info_coberturas=0x7f080007;
+        public static final int info_colisiones=0x7f080006;
+        public static final int layout_consejo=0x7f080008;
+        public static final int num_consejo=0x7f08000a;
+        public static final int progress_bar=0x7f08000b;
+        public static final int signal=0x7f080002;
+        public static final int textView1=0x7f080001;
     }
     public static final class layout {
         public static final int activity_harimakila_main=0x7f030000;
         public static final int activity_harimakila_record_points=0x7f030001;
         public static final int activity_play_walk=0x7f030002;
+        public static final int fragment_consejo_harimakila=0x7f030003;
     }
     public static final class menu {
         public static final int harimakila_main=0x7f070000;
