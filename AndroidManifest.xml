@@ -4,7 +4,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="15"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -28,8 +28,8 @@
         </activity>
         <activity
             android:name=".RecordPoints"
-            android:label="Grabación de puntos para el paseo"
-            android:parentActivityName="org.mobiolak.harimakila.Main">
+            android:label="Grabación de puntos para el paseo">
+            <!--  android:parentActivityName="org.mobiolak.harimakila.Main"> -->
             <intent-filter>
                 <action android:name="org.mobiolak.harimakila.RecordPoints" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -38,8 +38,8 @@
                 android:value="org.mobiolak.harimakila.Main" />
         </activity>
         <activity android:name=".PlayWalk"
-            android:label="@string/title_activity_play_walk"
-            android:parentActivityName="org.mobiolak.harimakila.Main">
+            android:label="@string/title_activity_play_walk">
+            <!-- android:parentActivityName="org.mobiolak.harimakila.Main"> -->
             <intent-filter>
                 <action android:name="org.mobiolak.harimakila.PlayWalk" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -163,6 +163,7 @@ public class PlayWalk extends Activity implements SensorEventListener {
 			 fT.replace(R.id.consejos,c);
 			 fT.commit();
 			 //fM.beginTransaction().add(R.id.consejos,c).commit();
+			 
 		}
 		
 	}
